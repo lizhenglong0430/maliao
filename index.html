@@ -191,9 +191,9 @@ var LEVELS = [
    "  xyyx                                                    xx     xx     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "  xyyx       xxx         xxx         xxx                                xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "  xyyx                                                                  xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
-   "  xyyx                                                           ||     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xyyx                                                xx           ||   xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "  x  xxxxxxx                                                            xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
-   "  x         x o xxxxxxxxx o xxxxxxxxx o xx                              xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  x         x o xxxxxxxxx o xxxxxxxxx o xx         xx                   xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "  x         x   x       x   x       x   x                 ||            xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "  x  @      xxxxx   o   xxxxx   o   xxxxx                               xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "  xxxxxxx                                     xxxxx       xx     xx     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
@@ -233,7 +233,7 @@ var actorchars =  {
 // 设置玩家位置
 function Player(pos){
     // 当前复活点的位置
-    this.pos = pos.plus(new Vector(15,-.5))
+    this.pos = pos.plus(new Vector(0,-.5))
     // 人物大小宽0.5，长1
     this.size = new Vector(.5,1)
     // 速度
@@ -668,7 +668,7 @@ function runGame(plans, Display) {
                 alert("You win!");
         });
     }
-    startLevel(2);
+    startLevel(0);
 }
 // 启动游戏
 // runGame(所有的地图,加入样式和元素的函数)
