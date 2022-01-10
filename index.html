@@ -7,8 +7,11 @@
     <title>Document</title>
 </head>
 <style>
-        body {
-  background: #222;
+body {
+    background: #222;
+    height: 100vh;
+    width: 100%;
+   
 }
 
 h2 {
@@ -479,7 +482,7 @@ Level.prototype.animate = function(step, keys) {
 // 在关卡中人物接触到的东西
 Level.prototype.playerTouched = function(type, actor) {
   if (type == "lava" && this.status == null) {
-        this.status = "lost";
+        // this.status = "lost";
         this.finishDelay = 1;
         // 如果是coin，则遍历出所有coin的变量
     } else if (type == "coin") {
@@ -668,7 +671,7 @@ function runGame(plans, Display) {
                 alert("You win!");
         });
     }
-    startLevel(0);
+    startLevel(2);
 }
 // 启动游戏
 // runGame(所有的地图,加入样式和元素的函数)
