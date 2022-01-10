@@ -35,6 +35,12 @@ h2 {
   border: solid 3px #333;
   box-sizing: content-box;
 }
+.speed_wall {
+  background: #333;
+}
+.water {
+  background: skyblue;
+}
 
 .actor {
   position: absolute;
@@ -67,32 +73,36 @@ h2 {
 
 </body>
 </html>
-<script>
-// 地图
-var LEVELS = [
+<script> 
+// 地图 
+var LEVELS = [ 
   ["                                                                                ",
    "                                                                                ",
-   "                                                                                ",
-   "                                                                                ",
-   "                                                                                ",
-   "                o                                                               ",
-   "                                                                                ",
-   "                      x ! x    x ! x   x ! x    x ! x    x ! x    x ! x         ",
-   "                      x!!!x    x!!!x   x!!!x    x!!!x    x!!!x    x!!!x         ",
-   "                      xx!xx    xx!xx   xx!xx    xx!xx    xx!xx    xx!xx         ",
-   "                       xvx      xvx     xvx      xvx      xvx      xvx          ",
-   "                x                                                           xx  ",
-   "  xx            x                            o o                             x  ",
-   "  x             x            o                                               x  ",
-   "  x             x                                xxxxx                     o x  ",
-   "  x          xxxx            o                                               x  ",
-   "  x  @       x  x                                                xxxxx       x  ",
-   "  xxxxxxxxxxxx  xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxxxx     xxxxxxx   xxxxxxxxx  ",
-   "                              x   x                  x     x                    ",
-   "                              x!!!x                  x!!!!!x                    ",
-   "                              x!!!x                  x!!!!!x                    ",
-   "                              xxxxx                  xxxxxxx                    ",
-   "                                                                                ",
+   "           xxxxxxxx                                                             ",
+   "           x      x                                                             ",
+   "           x      x                                                             ",
+   "           xyxxxxyx                 xxx    xxx    xxx       xxx                 ",
+   "           xyx  xyx                xx!xx  xx!xx  xx!xx     xx!xx                ",
+   "           xyx  xyx                x!!!x  x!!!x  x!!!x     x!!!x                ",
+   "           xyx  xyx                xx!xx  xx!xx  xx!xx     xx!xx                ",
+   "           xyx  xyx                 xvx    xvx    xvx       xvx                 ",
+   "           xyx  xyx                                                             ",
+   "           xyx  xyx                                                        xx   ",
+   "  xx       xyx  xyx                         o o                             x   ",
+   "  x        xyx  xyx         o                                               x   ",
+   "  x        xyx  xyx                             xxxxx                     o x   ",
+   "  x          x  x           o                                               x   ",
+   "  x  @       x  x                                                xxxxx =    x   ",
+   "  xxxxxxxxxxxx  xxxxxxxxzzzzzzzzzzzzzzzzzzzzxxxxxxxxxx     xxxxxxx   xxxxxxxxx  ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx        x     x                    ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx        x!!!!!x                    ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx        x!!!!!x                    ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx        xxxxxxx                    ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx                                   ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx                                   ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx                                   ",
+   "                       xzzzzzzzzzzzzzzzzzzzzx                                   ",
+   "                       xxxxxxxxxxxxxxxxxxxxxx                                   ",
    "                                                                                "],
   ["                                      x!!x                        xxxxxxx                                    x!x  ",
    "                                      x!!x                     xxxx     xxxx                                 x!x  ",
@@ -167,42 +177,28 @@ var LEVELS = [
    "  x               xxxxx       xx          x                             xxx       x!!!x          x         x  ",
    "  x               oxxxo       x    xxx    x                             x x        xxx          xxx        x  ",
    "  x                xxx        xxxxxxxxxxxxx  x oo x    x oo x    x oo  xx xx                    xxx        x  ",
-   "  x      @          x         x           x!!x    x!!!!x    x!!!!x    xx   xx                    x         x  ",
-   "  xxxxxxxxxxxxxxxxxxxxxxxxxxxxx           xxxxxxxxxxxxxxxxxxxxxxxxxxxxx     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ",
-   "                                                                                                              ",
-   "                                                                                                              "],
-  ["                                                                                                  xxx x       ",
-   "                                                                                                      x       ",
-   "                                                                                                  xxxxx       ",
-   "                                                                                                  x           ",
-   "                                                                                                  x xxx       ",
-   "                          o                                                                       x x x       ",
-   "                                                                                             o o oxxx x       ",
-   "                   xxx                                                                                x       ",
-   "       !  o  !                                                xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx       ",
-   "       x     x                                                x   x x   x x   x x   x x   x x   x x           ",
-   "       x= o  x            x                                   xxx x xxx x xxx x xxx x xxx x xxx x xxxxx       ",
-   "       x     x                                                  x x   x x   x x   x x   x x   x x     x       ",
-   "       !  o  !            o                                  xxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxxxx       ",
-   "                                                                                                              ",
-   "          o              xxx                              xx                                                  ",
-   "                                                                                                              ",
-   "                                                                                                              ",
-   "                                                      xx                                                      ",
-   "                   xxx         xxx                                                                            ",
-   "                                                                                                              ",
-   "                          o                                                     x      x                      ",
-   "                                                          xx     xx                                           ",
-   "             xxx         xxx         xxx                                 x                  x                 ",
-   "                                                                                                              ",
-   "                                                                 ||                                           ",
-   "  xxxxxxxxxxx                                                                                                 ",
-   "  x         x o xxxxxxxxx o xxxxxxxxx o xx                                                x                   ",
-   "  x         x   x       x   x       x   x                 ||                  x     x                         ",
-   "  x  @      xxxxx   o   xxxxx   o   xxxxx                                                                     ",
-   "  xxxxxxx                                     xxxxx       xx     xx     xxx                                   ",
-   "        x=                  =                =x   x                     xxx                                   ",
-   "        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   x!!!!!!!!!!!!!!!!!!!!!xxx!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+   "  x                 x         x           x!!x    x!!!!x    x!!!!x    xx   xx                    x         x  ",
+   "  x  xxxxxxxxxxxxxxxxxxxxxxxxxx           xxxxxxxxxxxxxxxxxxxxxxxxxxxxx     xxxxxxxxxxxx               xxxxx  ",
+   "  xyyx                                                                                          o             ",
+   "  xyyx                                                                                       o xxx            ",
+   "  xyyx    o              xxx                              xx                              o xxx               ",
+   "  xyyx                                                                                 o xxx                  ",
+   "  xyyx                                                                              o xxx                     ",
+   "  xyyx                                                xx                         o xxx                        ",
+   "  xyyx             xxx         xxx                                            o xxx                           ",
+   "  xyyx                                                                  xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xyyx                    o                                             xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xyyx                                                    xx     xx     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xyyx       xxx         xxx         xxx                                xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xyyx                                                                  xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xyyx                                                           ||     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  x  xxxxxxx                                                            xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  x         x o xxxxxxxxx o xxxxxxxxx o xx                              xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  x         x   x       x   x       x   x                 ||            xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  x  @      xxxxx   o   xxxxx   o   xxxxx                               xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "  xxxxxxx                                     xxxxx       xx     xx     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "        x=                  =                =x   x                     xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
+   "        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   x!!!!!!!!!!!!!!!!!!!!!xxxzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzxxx",
    "                                                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
    "                                                                                                              "]
 ];
@@ -237,7 +233,7 @@ var actorchars =  {
 // 设置玩家位置
 function Player(pos){
     // 当前复活点的位置
-    this.pos = pos.plus(new Vector(0,-.5))
+    this.pos = pos.plus(new Vector(15,-.5))
     // 人物大小宽0.5，长1
     this.size = new Vector(.5,1)
     // 速度
@@ -261,8 +257,11 @@ Player.prototype.moveX = function(step, level, keys) {
     // 查看是否接触到岩浆或者墙壁
     var obstacle = level.obstacleAt(newPos, this.size);
     // 如果有碰到社么东西
-    if (obstacle){
+    if (obstacle && obstacle != "speed_wall" && obstacle != "water"){
         level.playerTouched(obstacle);
+    }else if(obstacle == "water"){
+        let step2 = step / 3
+        this.pos = this.pos.plus(new Vector(this.speed.x * step2, 0))
     }
     else
         this.pos = newPos;
@@ -279,13 +278,33 @@ Player.prototype.moveY = function(step, level, keys) {
     var newPos = this.pos.plus(motion);
     // 查看人物是否接触到社么
     var obstacle = level.obstacleAt(newPos, this.size);
-    if (obstacle) {
+    if (obstacle != "speed_wall" && obstacle && obstacle != "water") {
+        gravity = 30
+        jumpSpeed = 17
         level.playerTouched(obstacle);
-        if (keys.up && this.speed.y > 0)
-        this.speed.y = -jumpSpeed;
+        if (keys.up && this.speed.y > 0){
+            this.speed.y = -jumpSpeed;
+        }
         else
         this.speed.y = 0;
-    } else {
+    } else if(obstacle == "speed_wall"){
+        gravity = 10
+        jumpSpeed = 13
+        this.pos = newPos;
+        if (keys.up && this.speed.y > 0){
+            this.speed.y = -jumpSpeed;
+        }
+    } else if(obstacle == "water"){
+        let step2 = step / 2
+        this.pos = this.pos.plus(new Vector(0, this.speed.y * step2));
+        gravity = 30
+        jumpSpeed = 13
+        if (keys.up && this.speed.y > 0){
+            this.speed.y = -jumpSpeed;
+        }
+    }else{
+        jumpSpeed = 17
+        gravity = 30
         this.pos = newPos;
     }
 };
@@ -321,11 +340,12 @@ function Lava(pos, ch) {
 Lava.prototype.type = "lava";
 // 岩浆的动作
 Lava.prototype.act = function(step, level) {
-    // 新坐标
+    // 刷新动画
     var newPos = this.pos.plus(this.speed.times(step));
-    // 查看是否接触到岩浆
-    if (!level.obstacleAt(newPos, this.size))
+    // 查看岩浆是否接触到墙壁
+    if (!level.obstacleAt(newPos, this.size)){
         this.pos = newPos;
+    }
     else if (this.repeatPos)
         this.pos = this.repeatPos;
     else
@@ -349,7 +369,6 @@ Coin.prototype.act = function(step) {
   this.pos = this.basePos.plus(new Vector(0, wobblePos));
 };
 
-// 难度设置
 // plan是地图的样子，占几行几列
 function Level(plan) {
     // 画布宽度
@@ -375,6 +394,10 @@ function Level(plan) {
 				this.actors.push(new Actor(new Vector(x, y), ch));
 			else if (ch === "x")
 				fieldType = "wall";
+			else if (ch === "z")
+				fieldType = "water";
+			else if (ch === "y")
+				fieldType = "speed_wall";
 			else if (ch === "!")
 				fieldType = "lava";
 			else if (ch === "|")
@@ -394,7 +417,7 @@ function Level(plan) {
 	this.player = this.actors.filter(function(actor) {
 		return actor.type === "player"
 	})[0];	
-    // 游戏状态
+    // 游戏状态，是否延迟
 	this.status = this.finishDelay = null;
 }
 // 查看关卡是否结束
@@ -403,24 +426,25 @@ Level.prototype.isFinished = function() {
 };
 // 关卡的其他标准
 Level.prototype.obstacleAt = function(pos, size) {
-    // 人物开始的x坐标
+    // 开始的x坐标
     var xStart = Math.floor(pos.x);
-    // 人物移动后的x坐标
+    // 移动后的x坐标
     var xEnd = Math.ceil(pos.x + size.x);
-    // 人物开始的y坐标
+    // 开始的y坐标
     var yStart = Math.floor(pos.y);
-    // 人物移动后的y坐标
+    // 移动后的y坐标
     var yEnd = Math.ceil(pos.y + size.y);
-    // 人物碰到墙壁则return wall
+    // 碰到墙壁则return wall
     if (xStart < 0 || xEnd > this.width || yStart < 0)
         return "wall";
-    // 人物高出地图则return lava
+    // 高出地图则return lava
     if (yEnd > this.height)
         return "lava";
+    // 遇到墙就不能前进
     for (var y = yStart; y < yEnd; y++) {
         for (var x = xStart; x < xEnd; x++) {
-        var fieldType = this.grid[y][x];
-        if (fieldType) return fieldType;
+            var fieldType = this.grid[y][x];
+            if (fieldType) return fieldType;
         }
     }
 };
@@ -440,8 +464,9 @@ Level.prototype.actorAt = function(actor) {
 var maxStep = 0.05;
 // 关卡动画
 Level.prototype.animate = function(step, keys) {
-  if (this.status != null)
-    this.finishDelay -= step;
+  if (this.status != null){
+      this.finishDelay -= step;
+  }
 
   while (step > 0) {
     var thisStep = Math.min(step, maxStep);
@@ -643,7 +668,7 @@ function runGame(plans, Display) {
                 alert("You win!");
         });
     }
-    startLevel(0);
+    startLevel(2);
 }
 // 启动游戏
 // runGame(所有的地图,加入样式和元素的函数)
